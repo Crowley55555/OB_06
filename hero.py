@@ -3,21 +3,27 @@ import random
 class Hero:
     def __init__(self, name):
         """
-        Инициализация героя.
+        Конструктор класса Hero.
 
-        :param name: Имя героя
+        Инициализирует нового героя с заданным именем, начальным здоровьем и силой атаки.
+
+        :param name: Имя героя, строка
         """
-        self.name = name
-        self.health = 100
-        self.attack_power = 20
+        self.name = name  # Имя героя
+        self.health = 100  # Начальное здоровье героя
+        self.attack_power = 20  # Сила атаки героя
 
     def attack(self, other, weapon=None):
         """
-        Атака другого героя с выбором оружия.
+        Метод для атаки другого героя.
+
+        Этот метод позволяет текущему герою атаковать другого героя, уменьшая его здоровье.
+        Урон зависит от выбранного оружия.
 
         :param other: Экземпляр класса Hero, которого атакуют
-        :param weapon: Тип оружия для атаки (sword/bow)
+        :param weapon: Тип оружия для атаки (sword/bow). Если не указано, используется стандартный урон.
         """
+        # Определяем урон в зависимости от выбранного оружия
         if weapon == "sword":
             damage = random.randint(15, 25)  # Урон мечом
         elif weapon == "bow":
@@ -25,13 +31,18 @@ class Hero:
         else:
             damage = random.randint(10, 30)  # Стандартный урон
 
+        # Уменьшаем здоровье атакуемого героя на величину урона
         other.health -= damage
+
+        # Выводим информацию об атаке
         print(f"{self.name} наносит {damage} урона {other.name} с помощью {weapon if weapon else 'кулаков'}!")
 
     def is_alive(self):
         """
-        Проверка, жив ли герой.
+        Метод для проверки, жив ли герой.
 
-        :return: True, если здоровье больше 0, иначе False
+        Возвращает True, если здоровье героя больше 0, иначе False.
+
+        :return: True, если герой жив, иначе False
         """
         return self.health > 0
